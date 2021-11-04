@@ -4,6 +4,10 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
   name="2rr">
+      <!-- Colors --> 
+    <material name="red">
+        <color rgba="0.925 0 0 1"/>
+    </material>
 
   <link name="world"/>
 
@@ -166,6 +170,34 @@
       upper="0"
       effort="0"
       velocity="0" />
+  </joint>
+  
+	<!-- endEffector -->
+	<link name="EndEffector">
+	<visual>
+	    <geometry>
+		<cylinder radius="0.015" length="0.30"/>
+		<origin rpy="0 0 0" xyz="0 0 0.125"/>
+	    </geometry>
+	    <material name="red"/>
+	</visual>
+	<inertial> 
+	    <mass value="0"/>
+	    <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+	</inertial> 
+	</link>
+  <joint
+    name="r3"
+    type="fixed">
+    <origin
+      xyz="0.0 -0.6 -0.15"
+      rpy="0 0 -3.0804" />
+    <parent
+      link="arm" />
+    <child
+      link="EndEffector" />
+    <axis
+      xyz="0 0 -1" />
   </joint>
 
 
