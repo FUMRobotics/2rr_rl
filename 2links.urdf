@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="2rr">
+
+  <link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base"/>
+  </joint>
+
+  <link
+    name="base">
+    <inertial>
+      <origin
+        xyz="0.199999712531253 0.243083213885683 0.299999282701517"
+        rpy="0 0 0" />
+      <mass
+        value="93.1153809750007" />
+      <inertia
+        ixx="6.82321659280708"
+        ixy="1.60309358254392E-05"
+        ixz="-1.94703266181187E-06"
+        iyy="4.86356688751049"
+        iyz="1.986637125917E-05"
+        izz="4.28554764294533" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://2rr/meshes/base.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://2rr/meshes/base.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="crank">
+    <inertial>
+      <origin
+        xyz="-0.303528572159264 -3.90389536477076E-05 -5.55111512312578E-17"
+        rpy="0 0 0" />
+      <mass
+        value="58.0525911841925" />
+      <inertia
+        ixx="0.77823635533177"
+        ixy="0.000902613512986233"
+        ixz="3.38994043004869E-17"
+        iyy="3.79835542461403"
+        iyz="-6.59086177629824E-18"
+        izz="3.70580291218291" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://2rr/meshes/crank.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://2rr/meshes/crank.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="R1"
+    type="revolute">
+    <origin
+      xyz="0.2 0.52 0.3"
+      rpy="0 0 0.20552" />
+    <parent
+      link="base" />
+    <child
+      link="crank" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="arm">
+    <inertial>
+      <origin
+        xyz="5.55111512312578E-17 -0.25 -0.1"
+        rpy="0 0 0" />
+      <mass
+        value="37.068583470577" />
+      <inertia
+        ixx="1.70992978035148"
+        ixy="-4.16333634234434E-17"
+        ixz="1.66703545697614E-18"
+        iyy="0.418143313440416"
+        iyz="4.64689549258995E-17"
+        izz="1.88094920398805" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://2rr/meshes/arm.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://2rr/meshes/arm.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r2"
+    type="revolute">
+    <origin
+      xyz="-0.7 0 -0.15"
+      rpy="0 0 -3.0804" />
+    <parent
+      link="crank" />
+    <child
+      link="arm" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.57"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+
+  <gazebo>
+    <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base</robotBaseFrame>
+    </plugin>
+  </gazebo>
+</robot>
